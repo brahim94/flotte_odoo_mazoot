@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+ <record id='type_view_form' model='ir.ui.view'>
+            <field name="name">reference.form</field>
+            <field name="model">tank.refrence</field>
+            <field name="arch" type="xml">
+                <form string="Type" >
+
+                    <groupe col="6">
+                        <field name="name"  placeholder="Ex: 895587ACH4"/>
+                    </groupe>
+
+                </form>
+            </field>
+        </record>
+
+
+
+     <record id='type_action' model='ir.actions.act_window'>
+        <field name="name">Reference Reservoir</field>
+        <field name="res_model">tank.refrence</field>
+        <!--field name="view_type">form</field-->
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new type
+          </p><p>
+            You can type several references (e.g. 458794HAGT, 789846548AH) .
+          </p>
+        </field>
+    </record>
+
+
+</odoo>

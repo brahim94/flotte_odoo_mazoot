@@ -1,0 +1,184 @@
+<odoo>
+
+    <report
+        id="report_fleet"
+        model="fleet.list"
+        string="Flotte Report"
+        name="flotte.report_fleet_view"
+        file="flotte.report_fleet"
+        report_type="qweb-pdf" />
+
+    <template id="report_fleet_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+                        <h2>Fiche d'installation</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-2">
+                                <!-- <strong>Client:</strong>
+                                <p t-field="o.client_id"/> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered" >
+                        <tr class="border-black" >
+                            <h4>Information Générale</h4>
+
+                            <thead>
+
+                                <tr>
+                                    <th style="border: 1px solid black"  class="text-left">Lieu d'installation</th>
+                                    <th style="border: 1px solid black" class="text-left">Date d'installation</th>
+                                    <th style="border: 1px solid black" class="text-left">Bénéficiaire</th>
+
+                                </tr>
+                            </thead>
+                         <tbody>
+                                     <tr t-foreach="docs" t-as="l">
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.lieu_install"/></td>
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.date_instal"/></td>
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.client_id"></span></td>
+
+                                     </tr>
+
+                         </tbody>
+                        </tr>
+                     </table>
+
+                    <table class="table table-bordered">
+                        <tr class="border-black">
+                            <h4>Information sur Véhicule</h4>
+
+                            <thead>
+
+                                <tr>
+                                    <th style="border: 1px solid black" class="text-left">Type Véhicule</th>
+                                    <th style="border: 1px solid black" class="text-left">Marque/Modèle</th>
+                                    <th style="border: 1px solid black" class="text-left">Réf Rés Pr</th>
+                                    <th style="border: 1px solid black" class="text-left">Réf Rés Sec</th>
+
+                                </tr>
+                            </thead>
+                         <tbody>
+                                     <tr t-foreach="docs" t-as="l">
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.type_ve_id"/></td>
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.marque_id"/></td>
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.reference_id"/></td>
+                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.ref_reservoir_sec"/></td>
+
+                                     </tr>
+
+                         </tbody>
+                        </tr>
+                     </table>
+
+
+
+
+                            <table class="table table-bordered">
+                                <tr class="border-black">
+                                    <h4>Matériel Installé</h4>
+                                    <!-- <strong>Matériel Installé</strong> -->
+                                   <!-- <th class="text_left">Boitier GPS/GPRS</th> -->
+
+                                            <thead>
+                                             <tr t-foreach="docs" t-as="l">
+                                                          <th style="border: 1px solid black" class="text-center">Boitier GPS/GPRS</th>
+                                                          <th style="border: 1px solid black" class="text-center">Relais Moteur Marche</th>
+                                                          <th style="border: 1px solid black" class="text-center">Relais Immob</th>
+                                                          <th style="border: 1px solid black" class="text-center">Jauge carburant Pr</th>
+                                                          <th style="border: 1px solid black" class="text-center">Jauge carburant Sec</th>
+                                                          <th style="border: 1px solid black" class="text-center">Sonde Température</th>
+
+
+                                 <!-- in case bghitiha fl column                       <th>
+                                                            <t t-if="l.relais_moteur_marche">
+                                                            <input type="checkbox" id="checkbox104_anyting_you_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                         </th>
+                                                        <th>Second column</th> -->
+                                                        <!--     <td><span t-field="l.relais_moteur_marche"/></td>
+                                                            <td><span t-field="l.relais_immobilisation"></span></td> -->
+                                             </tr>
+                                            </thead>
+                                             <tbody>
+                                                            <tr t-foreach="docs" t-as="l">
+                                                                <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.boitier_gps">
+                                                            <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.boitier_gps">
+                                                            <input type="checkbox" id="checkbox104_anything_you_give"  />
+                                                            </t>
+                                                                </td>
+                                                                <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.relais_moteur_marche">
+                                                            <input type="checkbox" id="checkbox104_anything_yu_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.relais_moteur_marche">
+                                                            <input type="checkbox" id="checkbox104_anything_yu_give"  />
+                                                            </t>
+                                                            </td>
+
+                                                            <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.relais_immobilisation">
+                                                            <input type="checkbox" id="checkbox104_anythig_yu_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.relais_immobilisation">
+                                                            <input type="checkbox" id="checkbox104_anythig_yu_give"  />
+                                                            </t>
+                                                            </td>
+
+                                                             <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.jauge_crb_prin">
+                                                            <input type="checkbox" id="checkbox104_aythig_yu_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.jauge_crb_prin">
+                                                            <input type="checkbox" id="checkbox104_aythig_yu_give"  />
+                                                            </t>
+                                                            </td>
+
+                                                            <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.jauge_crb_sec">
+                                                            <input type="checkbox" id="checkbox104_aytig_yu_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.jauge_crb_sec">
+                                                            <input type="checkbox" id="checkbox104_aytig_yu_give"  />
+                                                            </t>
+                                                            </td>
+
+                                                            <td style="border: 1px solid black" class="text-center">
+                                                            <t t-if="l.sonde">
+                                                            <input type="checkbox" id="checkbox104_ayig_yu_give" checked="checked"/>
+                                                                <label for="checkbox" class="label-table form-check-label"></label>
+                                                            </t>
+                                                            <t t-if="not l.sonde">
+                                                            <input type="checkbox" id="checkbox104_ayig_yu_give"  />
+                                                            </t>
+                                                            </td>
+
+
+
+                                                            </tr>
+
+                                             </tbody>
+
+                                        </tr>
+                            </table>
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

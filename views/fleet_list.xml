@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Data records go here -->
+    <record id="fleet_view_form" model="ir.ui.view">
+        <field name="name">Fleet Form</field>
+        <field name="model">fleet.list</field>
+        <field name="arch" type="xml">
+        <form>
+             <sheet>
+
+                    <group col="2">
+                        <group string="Générale">
+                            <field name="client_id" />
+                            <field name="date_instal"/>
+                            <field name="lieu_install" />
+                        </group>
+                         <group string="Information Véhicule">
+                           <field name="type_ve_id" />
+                            <field name="marque_id"/>
+                            <field name="name" />
+                            <field name="reference_id" />
+                            <field name="ref_reservoir_pr" />
+                             <field name="Table_id" />
+                            <field name="ref_reservoir_sec" />
+                        </group>
+                    </group>
+
+
+                        <group col="2" >
+                            <group string="Matériel Installé">
+                            <field name="boitier_gps" eval="False"/>
+                            <field name="relais_moteur_marche" eval="False"/>
+                            <field name="relais_immobilisation" eval="False"/>
+                            <field name="jauge_crb_prin" eval="False"/>
+                            <field name="jauge_crb_sec" eval="False"/>
+                            <field name="sonde" eval="False"/>
+                            </group>
+                            <group string="Information Balise">
+                                <field name="iemi_id"/>
+                                <field name="SIM_N"/>
+                                <field name="SIM_SE"/>
+                            </group>
+                        </group>
+
+
+
+            </sheet>
+
+
+
+
+        </form>
+        </field>
+    </record>
+
+
+
+    <record id="floot_list_view_tree" model="ir.ui.view">
+        <field name="name">floot.list.tree</field>
+        <field name="model">fleet.list</field>
+        <field name="arch" type="xml">
+            <tree>
+            <field name="type_ve_id"/>
+            <field name="client_id"/>
+            <field name="name"/>
+            <field name="marque_id"/>
+            <field name="date_instal"/>
+            <field name="lieu_install"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="fleet_list_action">
+    <field name="name">Fleet</field>
+    <field name="res_model">fleet.list</field>
+    <!--field name="view_type">form</field-->
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+            <p class="oe_view_nocontent_smiling_face"> créer votre première liste véihcule
+                </p>
+            </field>
+        </record>"
+
+    <menuitem name="Fleet" id="menu_root" sequence="115" groups="base.group_user" web_icon="flotte,static/description/icon.png"/>
+    <!-- <menuitem id="fleet_top_menu" name="Fleet" sequence="2" groups ="base.group_user"/> -->
+    <menuitem name="Fleet"  parent="menu_root" id="fleet_list_menu" sequence="100" groups ="base.group_user"/>
+    <menuitem action="fleet_list_action" parent="fleet_list_menu" id="fleet_list_menu_item" sequence="2"/>
+    <!--  action="fleet_list_action" parent="menu_root" id="fleet_list_menu" groups ="base.group_user"/> -->
+
+
+        <record id='marque_view_form' model='ir.ui.view'>
+            <field name="name">service.form</field>
+            <field name="model">fleet.list.service</field>
+            <field name="arch" type="xml">
+                <form string="Brand" >
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_assignation_logs" string="IMEI History" type="object" class="oe_stat_button" icon="fa-history"/>
+                 </div>
+                    <groupe col="2">
+                        <field name="name"/>
+                    </groupe>
+
+                </form>
+            </field>
+        </record>
+
+
+
+     <record id='fleet_vehicle_service_action' model='ir.actions.act_window'>
+        <field name="name">Vehicule Services</field>
+        <field name="res_model">fleet.list.service</field>
+        <!--field name="view_type">form</field-->
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new brand
+          </p><p>
+            You can define several types (e.g. VOLVO, JEEP) .
+          </p>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_assignation_log_view_list" model="ir.ui.view">
+        <field name="name">imei.assignation.log.assignation.log.view.tree</field>
+        <field name="model">imei.assignation.log</field>
+        <field name="arch" type="xml">
+            <tree string="Assignation Logs" editable="bottom">
+                <field name="imei_id" invisible="1"/>
+                <field name="client_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--<menuitem action='fleet_vehicle_service_action' parent="fleet_list_menu" id ="fleet_vehicle_log_services_menu" groups="base.group_user"/>-->
+</odoo>
