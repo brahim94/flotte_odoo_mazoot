@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-        <record id='marque_view_form' model='ir.ui.view'>
-            <field name="name">marque.form</field>
-            <field name="model">fleet.list.marque</field>
-            <field name="arch" type="xml">
-                <form string="Brand" >
-
-                    <groupe col="2">
-                        <field name="name"  placeholder="Ex: VOLVO"/>
-                    </groupe>
-
-                </form>
-            </field>
-        </record>
+        <record id="building_view_form" model="ir.ui.view">
+    <field name="name">my_module.buildings.form</field>
+    <field name="model">my_module.buildings</field>
+    <field name="arch" type="xml">
+        <form string="Buildings Form">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="rooms">
+                        <tree>
+                            <field name="name"/>
+                            <button
+                                string="open"
+                                type="object"
+                                name="open_one2many_line"
+                                context="{'default_active_id': active_id}">
+                            </button>
+                        </tree>
+                    </field>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
 
 
 
      <record id='type_action' model='ir.actions.act_window'>
         <field name="name">Vehicule Marque</field>
-        <field name="res_model">fleet.list.marque</field>
+        <field name="res_model">my_module.buildings</field>
         <!--field name="view_type">form</field-->
         <field name="view_mode">form</field>
         <field name="help" type="html">

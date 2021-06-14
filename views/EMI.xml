@@ -18,6 +18,117 @@
                    </group>
 
                     </group>
+                    <notebook>
+                    <page name="information" string="Autres informations">
+                        <group name="main_info"  col="2">
+                                <group name="salary_and_advantages" string="Avantage mensuels en espèces">
+                                        <group>                             
+                                            <field name="wage"/>
+                                        </group>
+                                    </group>
+                                <group>
+                                        <group string="Congé">
+                                        <field name="conge_annuel_mois"/>
+                                        <field name="conge_annuel"/>
+                                        <field name="condition_augmentation_an"/>
+                                        <field name="augmentation_mois"/>
+                                        <field name="reliquat_conge"/>
+                                        </group>
+                                </group>  
+                                 <group>
+                                    <group>
+                                         
+                                            <field name="mode_pymnt"/>
+                                            <field name="hsnorm"/>
+                                            <field name="hs25"/>
+                                            <field name="hs50"/>
+                                            <field name="hs100"/>
+                                        </group>
+                                        </group>
+                                        <group>
+                                        </group>
+                                        <group>
+                                        <field name="unite_base"/>
+                                            <field name="seniority"/> 
+                                            <field name="nb_days" attrs="{'invisible':[('unite_base','&lt;&gt;','Jour')]}"/> 
+                                            <field name="nb_heurs" attrs="{'invisible':[('unite_base','&lt;&gt;','Heure')]}"/> 
+                                        </group>
+                       </group>  
+                       
+                   </page>    
+                    <page string="Primes et indemnités">
+                    <group col="2">
+                            <group string="Primes">
+                                <group>
+                                    <field name="mode_pymnt"/>
+                                    <field name="hsnorm"/>
+                                    <field name="hs25"/>
+                                    <field name="hs50"/>
+                                    <field name="hs100"/>
+
+                                    <field name="frais_voiture_a_m"/>
+                                    <field name="frais_voiture_employe"/>
+                                    <field name="frais_voiture_direction"/>
+                                    <field name="frais_voiture_imp"/>
+                                    <field name="prime_exep_one"/> 
+                                    <field name="prime_fete"/>
+                                    <field name="prime_fin_carriere"/>
+                                    <field name="prime_intressement"/>
+                                    <field name="prime_key_user"/>
+                                    <field name="prime_logement"/>
+                                    <field name="prime_pelerinage"/>
+                                    <field name="prime_s_a_p"/>
+                                    <field name="prime_bonus"/>
+                                    <field name="prime_com_lub"/>
+                                </group>
+                               
+                            </group>
+
+                            <group string="Indemnité">
+                                <group>
+                                    <field name="indm_transport"/>
+                                    <field name="indm_kilometrique"/>
+                                    <field name="panier_verif"/>
+                                    <field name="panier_journalise" attrs="{'invisible':[('panier_verif','=',False)]}"/>
+                                    <field name="panier_net_cnss" attrs="{'invisible':[('panier_verif','=',False)]}"/>               
+                                    <field name="prime_panier" invisible="1"/>
+                                    <field name="prime_panier_imposable" invisible="1"/> 
+                                    <field name="prime_panier_net" invisible="1"/> 
+                                    <field name="prime_autre1"/>
+                                    <field name="prime_autre2"/>
+                                    <field name="credit_Logement"/>
+                                    <field name="cot_sal_mass"/>
+                                    <field name="retenu_petrom_card"/>
+                                    <field name="frais_medicau"/>
+                                    <field name="indemnite_mutation"/>
+                                    <field name="cot_conjoint_cmin"/>
+                                    <field name="prime_fete"/>
+                                    <field name="indm_licenciement"/>
+                    
+                                    <field name="ind_caisse"/>
+                                    <field name="ind_voiture_cadre"/>
+                                    <field name="ind_demenagement"/>
+                                    <field name="ind_depart_imposable"/>
+                                    <field name="ind_encaissement"/> 
+                                    <field name="ind_fonction"/>
+                                    <field name="ind_preavis"/>
+                                    <field name="ind_velomoteur"/>
+                                    <field name="ind_zone_sud"/>
+                                    <field name="achoura_aid_scolaire"/>
+                                    <field name="allocation_achoura"/>
+                                    <field name="allocation_scolaire"/>
+                                </group>
+                            </group>
+                             <group>
+                                <group>
+                                    <field name="unite_base"/>
+                                    <field name="nb_days" attrs="{'invisible':[('unite_base','&lt;&gt;','Jour')]}"/> 
+                                    <field name="nb_heurs" attrs="{'invisible':[('unite_base','&lt;&gt;','Heure')]}"/> 
+                                </group>
+                                </group>
+                    </group>
+                </page>
+                </notebook>
             </sheet>
                          <!--   <div class="oe_chatter">
                               <field name="message_follower_ids" widget="mail_followers"/>

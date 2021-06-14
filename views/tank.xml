@@ -17,8 +17,11 @@
                         <group col="2" string="Générale">
                              <group >
                                  <field name="name"  style="width:90%" />
+                                 <field name="firstname"  style="width:90%" />
+                                 <field name="lastname"  style="width:90%" />
                             <label for="dim"/>
                             <div class="o_row" style="max-width: 200px; max-height: 100px;">
+                         
                           <span>L:</span><field name="lang"/>
                           <span>l:</span><field name="larg"/>
                           <span>H:</span><field name="haut"/><span>cm</span>
@@ -30,6 +33,7 @@
                             </div>
                                  <field name="type"  style="width:90%"/>
                           <field name="truck_id"  style="width:90%"/>
+                                 <field name="reference_id"/>
 
                                  <field name="client_id" style="width:90%"/>
 
@@ -92,6 +96,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="nameee"/>
                 <field name="lang" />
                 <field name="larg"/>
                 <field name="haut"/>

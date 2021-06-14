@@ -20,7 +20,7 @@ class Fleet(models.Model):
          'UNIQUE (name)',
          'ID TABLE must be unique.')
     ]
-    #reference_id = fields.Many2one('tank.refrence', string='Reference reservoir')
+    reference_id = fields.Many2one('tank.refrence', string='Reference reservoir')
     #name = fields.Char('Ref')
     lang=fields.Char('L')
     larg=fields.Char('l')
@@ -41,16 +41,24 @@ class Fleet(models.Model):
     sensor_max=fields.Char('Sensor Max' ,default="4095")
     image = fields.Binary(attachment=True,
               help="This field holds the image used as logo for the brand, limited to 1024x1024px.")
+    nameee = fields.Char(compute='_compute_name', store="True")
+    firstname = fields.Char()
+    lastname = fields.Char()
+
+    @api.depends('firstname', 'lastname')
+    def _compute_name(self):    
+        for record in self:        
+            record.nameee = record.firstname + ' ' + record.lastname
 
 
 
-    @api.model
-    def create(self, vals):
-        tools.image_resize_images(vals)
-        return super(Fleet, self).create(vals)
+    #@api.model
+    #def create(self, vals):
+        #tools.image_resize_images(vals)
+        #return super(Fleet, self).create(vals)
 
-    @api.multi
-    def write(self, vals):
-        tools.image_resize_images(vals)
-        return super(Fleet, self).write(vals)
+    #@api.multi
+    #def write(self, vals):
+        #tools.image_resize_images(vals)
+        #return super(Fleet, self).write(vals)
 

@@ -1,0 +1,45 @@
+<odoo>
+  <data>
+
+    <record id="view_tank_reference_form" model="ir.ui.view">
+        <field name="name">Tank Reference form</field>
+        <field name="model">tank.refrence</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                  <group>
+                  <group>
+                    <field name="name"/>
+                    <field name="SIM_N_ref"/>
+                    <field name="SIM_SE_ref"/>
+                    <field name="lieu_install_ref"/>
+                  </group>
+                  </group>                 
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="tank_reference_list_view">
+      <field name="name">tank Reference list</field>
+      <field name="model">tank.refrence</field>
+      <field name="arch" type="xml">
+        <tree>
+                    <field name="name"/>
+                    <field name="SIM_N_ref"/>
+                    <field name="SIM_SE_ref"/>
+                    <field name="lieu_install_ref"/>
+        </tree>
+      </field>
+    </record>
+ <record model="ir.actions.act_window" id="action_window_tank_reference">
+      <field name="name">Tank Reference</field>
+      <field name="res_model">tank.refrence</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem id="tank_reference_list" parent="fleet_list_menu"
+              action="action_window_tank_reference" sequence="5" name="Tank Reference" />
+  </data>
+</odoo>

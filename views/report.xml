@@ -5,176 +5,2386 @@
         model="fleet.list"
         string="Flotte Report"
         name="flotte.report_fleet_view"
-        file="flotte.report_fleet"
-        report_type="qweb-pdf" />
+        file="flotte.report_fleet" />
 
     <template id="report_fleet_view">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
+                
+                <style>
+                table, th, td {
+                border: none;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                th.violet {
+                background-color: #FFC0CB;
+                }
+                td.violet {
+                background-color: #FFC0CB;
+                }
+                
+                th.yellow {
+                background-color: #FFFF00;
+                }
+                td.grey, th.grey {
+                background-color: #F5F5F5;
+                }
+                td.green, th.green {
+                background-color: #90EE90;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                table.solid {
+                float:left;
+                border-collapse: separate;
+                border-spacing: 7px 7px; 
+                }
+                
+                td.solid {
+                border: 1px solid black;
+                }
+                th.solid {
+                border: 1px solid black;
+                }
+                div.margin {
+                margin-top:100px;
+                }
+                div.n{
+                margin-left:10px; 
+                margin-right:auto;
+                }
+                th.middle {
+                text-align:center;
+                vertical-align:middle;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.centre {
+                margin-top:40px;
+                margin-left:auto; 
+                margin-right:auto;
+                }
 
-                    <div class="page">
-                        <h2>Fiche d'installation</h2>
-                        <div class="row mt32 mb32">
-                            <div class="col-2">
-                                <!-- <strong>Client:</strong>
-                                <p t-field="o.client_id"/> -->
-                            </div>
+                </style>
+
+                <div class="n">
+                    <strong><h4> LES GRANDS MOULINS EL ATLAS  </h4></strong>
+                </div>
+
+                <table  class="solid" width="100%">
+                        <tr>
+                            <th></th>
+                            <th class="solid yellow" style="text-align: left" width="20%">Du:</th>
+                            <td class="solid violet" style="text-align: left" width="30%">08/02/2021</td>  
+                        </tr>
+                         <tr>
+                            <th class="solid grey" style="text-align: center">Etat des ventes</th>
+                            <th class="solid yellow" style="text-align: left" width="20%">Au:</th>
+                            <td class="solid violet" style="text-align: left" width="30%">08/05/2021</td>  
+                        </tr>
+                    </table>
+
+                    <table  class="solid" width="100%">
+                        <tr>
+                            <th class="solid yellow" style="text-align: center" width="20%">Produit:</th>
+                            <td class="solid violet" style="text-align: center" width="30%">PS-9</td>  
+                            <th class="solid yellow" style="text-align: center" width="20%">Client</th>
+                            <td class="solid violet" style="text-align: center" width="30%">Tous</td>  
+                        </tr>
+                    </table>
+
+                    <table width="99.09%">
+                        <thead>
+                            <tr>
+                                <th class="solid grey" style="text-align: center">Province</th>
+                                <th class="solid grey" style="text-align: center">Centre</th>  
+                                <th class="solid grey" style="text-align: center">Nom Client</th>
+                                <th class="solid grey" style="text-align: center">N° Facture</th>  
+                                <th class="solid grey" style="text-align: center">Bon Livrai</th>  
+                                <th class="solid grey" style="text-align: center">Qté</th>  
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="solid" style="text-align: left" rowspan="4"><u>Inzgan Ait Melloul</u></td>
+                                <td class="solid" style="text-align: left" rowspan="4">Ait Melloul</td>  
+                                <td class="solid" style="text-align: left" rowspan="4">Akoubas Rachid</td>
+                                <td class="solid" style="text-align: left">290841</td>  
+                                <td class="solid" style="text-align: left">290841</td>  
+                                <td class="solid" style="text-align: left">50</td>  
+                            </tr>
+                            <tr>
+                                <th class="solid violet" style="text-align: right" colspan="2">Total Client</th>  
+                                <td class="solid grey" style="text-align: right">50</td>  
+                            </tr>
+                            <tr>
+                                <th class="solid yellow" style="text-align: right" colspan="2">Total Centre</th>  
+                                <td class="solid" style="text-align: right">50</td>  
+                            </tr>
+                            <tr>
+                                <th class="solid green" style="text-align: right" colspan="2">Total Province</th>  
+                                <td class="solid" style="text-align: right">50</td>  
+                            </tr>
+                        </tbody>
+                        <tr>   
+                            <td colspan="3"></td>  
+                            <th class="solid yellow" style="text-align: right" colspan="2">Total Journée</th>
+                            <td class="solid" style="text-align: right">300</td>
+                        </tr>    
+                    </table>
+
+    <!-- RELEVE QUOTIDIEN DES VENTES DE F.NLE BLE TENDRE  -->
+<!-- <record id="paperformat_page" model="report.paperformat">
+        <field name="name">format - Contact Page</field>
+        <field name="default" eval="True"/>
+        <field name="format">A3</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report
+        id="report_fleet"
+        model="fleet.list"
+        string="Flotte Report"
+        name="flotte.report_fleet_view"
+        file="flotte.report_fleet"
+        paperformat="paperformat_page" />
+
+    <template id="report_fleet_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                
+                <style>
+                table, th, td {
+                border: none;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                th.violet {
+                background-color: #FFC0CB;
+                }
+                th.yellow {
+                background-color: #FFFF00;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                table.solid {
+                float:left;
+                border-collapse: separate;
+                border-spacing: 7px 7px; 
+                }
+                
+                td.solid {
+                border: 1px solid black;
+                }
+                th.solid {
+                border: 1px solid black;
+                }
+                div.margin {
+                margin-top:100px;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                th.middle {
+                text-align:center;
+                vertical-align:middle;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.centre {
+                margin-top:40px;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+
+                </style>
+
+                <div class="n">
+                    <strong><h4> RELEVE QUOTIDIEN DES VENTES DE F.NLE BLE TENDRE  </h4></strong>
+                </div>
+                
+                <div id="container">
+                    <table  class="solid" width="35%">
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Code</th>
+                            <td class="solid" style="text-align: center">71</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Service Exterieur De</th>
+                            <td class="solid" style="text-align: center">AGADIR</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Date jj/mm/aaaa  </th>
+                            <td class="solid" style="text-align: center">08/02/2021</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">N° d'enregistrement Onict</th>
+                            <td class="solid" style="text-align: center"></td>
+                        </tr>
+                    </table>
+
+                    <table  class="solid" width="30%">
+                        <tr>
+                            <th class="solid yellow" style="text-align: center">Destinataire</th>
+                        </tr>
+                        <tr>
+                            <td class="solid" style="text-align: left">
+                            2 Ex: Onid Regional ou Provincial
+                            <br>1 Ex: Province </br>
+                            <br>1 Ex: Archive Minotier </br> 
+                            <br>1</br>
+                            </td>
+                        </tr>
+                    </table> 
+
+                    <table  class="solid" width="35%">
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Numero</th>
+                            <td class="solid violet" style="text-align: center" width="10%"></td>
+                            <td class="solid " style="text-align: left" > Folio N°</td>
+                            <td class="solid" style="text-align: center" width="10%">1</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Code Produit</th>
+                            <td class="solid" style="text-align: center">312</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Minoterie  </th>
+                            <td class="solid" style="text-align: center" colspan="3">LES GRANDS MOULINES EL ATLAS</td>
+                        </tr>
+                        <tr>
+                            <th class="solid violet" style="text-align: left">Code Minoterie</th>
+                            <td class="solid" style="text-align: center">300065</td>
+                            <td class="solid" style="text-align: center" colspan="2">AIT MELLOUL</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="margin">
+                <table  class="centre margin" width="99.09%">
+                    <thead>
+                        <tr>
+                            <tr>
+                                <th class="solid yellow" style="text-align: center" colspan="2">Bénéficiare</th>
+                                <th class="solid middle" rowspan="2">Province</th>
+                                <th class="solid yellow" style="text-align: center" colspan="2">Commune</th>
+                                <th class="solid middle" rowspan="2">Qté Vendu En Qx</th>
+                                <th class="solid yellow" style="text-align: center" colspan="2">Quantité Transporté</th>
+                                <th class="solid middle" rowspan="2">Référence Prog Ravitail</th>
+                                <th class="solid middle" rowspan="2">Facture N°</th>
+                                <th class="solid yellow" style="text-align: center" colspan="3">Référence De Transport</th>
+                                <th class="solid middle" rowspan="2">Code(1)</th>
+                                
+                                <tr>
+                                    <th class="solid" style="text-align: center">Nom et Prénom</th>
+                                    <th class="solid" style="text-align: center">Code (1)</th>
+                                    <th class="solid" style="text-align: center">Nom</th>
+                                    <th class="solid" style="text-align: center">Code (1)</th>
+                                    <th class="solid" style="text-align: center">S.N.T.L</th>
+                                    <th class="solid" style="text-align: center">C.Privé</th>
+                                    <th class="solid" style="text-align: center">Bon Livrai</th>
+                                    <th class="solid" style="text-align: center">Camion N°</th>
+                                    <th class="solid" style="text-align: center">Ordre Trs</th>
+                                </tr>
+                            </tr>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr>
+                                <td class="solid" style="text-align: left; height:300px">Khalid Lamouhcine</td>
+                                <td class="solid" style="text-align: center"></td>
+                                <td class="solid" style="text-align: left">INZGAN AIT MELLOL</td>
+                                <td class="solid" style="text-align: left">KLEAA</td>
+                                <td class="solid" style="text-align: center"></td>
+                                <td class="solid" style="text-align: center">60</td>
+                                <td class="solid" style="text-align: center"></td>
+                                <td class="solid" style="text-align: center">60</td>
+                                <td class="solid" style="text-align: left"></td>
+                                <td class="solid" style="text-align: center">292972</td>
+                                <td class="solid" style="text-align: center">692904</td>
+                                <td class="solid" style="text-align: center">32487 A 33</td>
+                                <td class="solid" style="text-align: center"></td>
+                                <td class="solid" style="text-align: center"></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                        </tr>
+                    </tbody>
+                        <tr>
+                            <td colspan="3"></td>  
+                            <th class="solid" style="text-align: center" colspan="2">Total Journée</th>
+                            <td class="solid" style="text-align: center">635</td>
+                            <td class="solid" style="text-align: center">500</td>
+                            <td class="solid" style="text-align: center">60</td>
+                            <th style="text-align: center" colspan="6">(1) A Remplir Par le Service Regional De L'Onicf</th>
+                        </tr>
+                    </table>
+                    </div>
+                    <div>
+                        <div style="float: left"> 
+                            <strong><i>Reconnu conforme aux ventes</i>  <u>F.NLE BLE TENDRE</u></strong> 
+                            <br> <strong><i>Journée Du 08/02/2021</i></strong></br>
+                            <br> <strong><i>Signuature et qualité du signuature</i></strong> </br>
                         </div>
+                        <div style="float: left; margin-left:150px ">
+                            <strong><i>Cahchet de la Monterie</i> </strong>
+                        </div> 
+                    </div> -->
+    <!-- RELEVE QUOTIDIEN DES VENTES DE F.NLE BLE TENDRE  -->
+    
+                <!-- <div style="position:absolute;left:698px;top:5.98px">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                    <br>Page : 1</br>
+                </div>
+                
+                
+                <div class="m" style="vertical-align:left">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s m">
+                    <strong><h4> MOUVEMENTS COMPTABLES PAR RUBRIQUES </h4></strong>
+                </div>
+                
+                <div class="n m">
+                    Periode du : 01/2020
+                </div>
+               
+                
+
+                <table  class="doted" width="100%">
+                <thead>
+                    <tr>
+                        <th class="doted" style="text-align: center">Imputation</th>
+                        <th class="doted" style="text-align: center">Desigantion</th>
+                        <th class="doted" style="text-align: center">Montant Débit</th>
+                        <th class="doted" style="text-align: center">Montant Crédit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align:right" >745</td>
+                        <td style="text-align:center" >PRET FETE</td>
+                        <td style="text-align:center" >444</td>
+                        <td style="text-align:center" >45</td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="doted"  style="text-align:left" ><strong>745</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>PRET FETE</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>444</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>45</strong></td>
+                        
+                    </tr>
+                     <tr>
+                        <td   style="text-align:right" >650</td>
+                        <td   style="text-align:center" >RETENUE COT. SAL M.ASS</td>
+                        <td   style="text-align:center" >444</td>
+                        <td   style="text-align:center" >45</td>
+                        
+                    </tr>
+                     <tr>
+                        <td class="doted"  style="text-align:left" ><strong>745</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>PRET FETE</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>444</strong></td>
+                        <td class="doted"  style="text-align:center" ><strong>45</strong></td>
+                        
+                    </tr>                    
+                </tbody>
+
+            </table>  -->
+                <!-- ETAT COMPRATIF DE PAIE -->
+                <!-- <style>
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                div.s {
+                width: 60%;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                border-style: dotted;
+                border: 1px black;
+                }
+                div.m {
+                margin-top:20px;
+                }
+        
+                </style>
+
+                <div class="m" style="text-align:right;vertical-align:right">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                    <br>1</br>
+                </div>
+                
+                
+                <div class="m" style="vertical-align:left">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s m">
+                    <strong><h4> ETAT COMPRATIF DE PAIE </h4></strong>
+                </div>
+
+                <div class="n m">
+                    Periode du : 01/2020
+                </div>
+               
+                <table  class="doted m" width="100%">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="doted" style="text-align: center">SAL BASE</th>
+                        <th class="doted" style="text-align: center">P.ANC</th>
+                        <th class="doted" style="text-align: center">LOG</th>
+                        <th class="doted" style="text-align: center">IND.REP</th>
+                        <th class="doted" style="text-align: center">IND.FCT</th>
+                        <th class="doted" style="text-align: center">IND.RESP</th>
+                        <th class="doted" style="text-align: center">IND.TRSP</th>
+                        <th class="doted" style="text-align: center">IND.SAL</th>
+                        <th class="doted" style="text-align: center">IND.CAIS</th>
+                        <th class="doted" style="text-align: center">IND.ENC</th>
+                        <th class="doted" style="text-align: center">LOG.EXP</th>
+                        <th class="doted" style="text-align: center">IND.VELOM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="3">000272</th>
+                        <th colspan="3">OULBOUB SAID</th>
+                    </tr>
+                    <tr>
+                        <th class="doted">Mois</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <th class="doted">Mois -1</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                   <tr>
+                        <th class="doted">Diff.</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="3"><u>Total Société</u></th>
+                        <th colspan="3"><u>Nbr. Agent :</u></th>
+                    </tr>
+                    <tr>
+                        <th class="doted">Mois</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <th class="doted">Mois -1</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                   <tr>
+                        <th class="doted">Diff.</th>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                        <td class="doted" style="text-align: center"></td>
+                    </tr>
+                </tbody>
+
+            </table>   -->
+            <!-- ETAT COMPRATIF DE PAIE -->
+                
+                <!-- ETAT DE CONTROLE MENSUELE DE L'I.R -->
+<!--                 
+                <style>
+                
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                div.s {
+                width: 60%;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                th.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                table.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                div.m {
+                margin-top:20px;
+                }
+        
+                </style>
+            
+                <div class="n s m" >
+                    <strong>ETAT DE CONTROLE MENSUELE DE L'I.R</strong>
+                    <br></br>
+                    <br><strong>PERIODE : 01 / 2020</strong></br>
+                </div>
+        
+                    <table  class="m" width="100%">
+                                <tr>
+                                    <th style="text-align: left">Identifiant Fiscal de l'employeur </th>
+                                    <td style="text-align: left">: 01031059</td>
+                                    <th style="text-align: center">Nom et Prénom ou Raison Sociale </th>
+                                    <td style="text-align: center">: PETROM</td>
+                                    <th style="text-align: right">Intercalaire N°  </th>
+                                    <td style="text-align: right">: 1 / 2</td>
+                                </tr>
+                    </table> 
+
+                <table class="centre marg bord">
+                            <tr>
+                                <thead>
+                                        <tr>
+                                            <th class="bord" rowspan="2"> NUMERO DE MAICULE 
+                                            <th class="bord">NOM ET PRENOM</th>
+                                            <th class="bord">N° CIN ou Carte d'étranger</th>
+                                            <th class="bord" rowspan="2"> S F</th>
+                                            <th class="bord">Montant brut des traitements, salaires et émoluments (1)</th>
+                                            <th class="bord">Montant des indmenités Verséess à titre de frais professionels (3)</th>
+                                            <th class="bord" rowspan="2"> Taux des Frais Prof</th>
+                                            <th class="bord">Montant du revenu brut imposable (5)</th>
+                                            <th class="bord" colspan="2">Montant des cotisations d'assurance retraite (7)</th>
+                                            <th class="bord">Montant des autres retenues (8)</th>
+                                            <th class="bord">Montant du revenu net imposable (10)</th>
+                                            <th class="bord">Période en jours</th>
+                                            </th>
+                                        <tr>
+                                            <th class="bord"> ADRESSE PERSONNELLE </th>
+                                            <th class="bord">N° P.P.R ou CNSS</th>
+                                            <th class="bord">Montant des indmenités Verséess à titre de frais professionels (3)</th>
+                                            <th class="bord">Montant des éléments exonérés (4)</th>
+                                            <th class="bord">Montant des Frais professionels (6)</th>
+                                            <th class="bord">Montant des Echéances prélevées (9)</th>
+                                            <th class="bord">Date de l'AC (**)</th>
+                                            <th class="bord">Date du PH (***)</th>
+                                            <th class="bord">I.R prélevé (11)</th>
+                                            <th class="bord">Nb.Déductions pour charges de famille</th>
+                                        </tr>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="bord" rowspan="2"> 000160 
+                                    <td class="bord">OUNKHIL LAHOUSSINE</td>
+                                    <td class="bord">B 726776</td>
+                                    <td class="bord" rowspan="2"> M</td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                    <tr>
+                                        <td class="bord"> AZHAR 1MM 15 N 37 TR 7/1 CASA </td>
+                                        <td class="bord">183321811</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">1 040,00</td>
+                                        <td class="bord">1 711,56</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">398,21</td>
+                                        <td class="bord">3</td>
+                                    </tr>
+                                </tr>
+                        </tbody>
+                            <tr>
+                                    <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL PAGE</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                            </tr>
+    
+                            <tr>
+                                   <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL CUMULE</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                        </tr>
+                        <tr>
+                                    <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL GENERAL</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                        </tr>
+                        </tr>
+                    </table> -->
+                <!-- ETAT DE CONTROLE MENSUELE DE L'I.R -->
+
+
+                <!-- ANNEXE A LA DECLARATION DES TRAITEMENTS ET SALAIRES -->
+                 <!-- <style>
+                
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                div.s {
+                width: 60%;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                th.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                table.bord {
+                vertical-align: middle;
+                text-align: center;
+                border: 1px solid black;
+                }
+                div.m {
+                margin-top:20px;
+                }
+        
+                </style>
+
+            
+                <div class="n s m" >
+                    <strong>ANNEXE A LA DECLARATION DES TRAITEMENTS ET SALAIRES</strong>
+                    <br><strong>PERSONNEL PERMANENT</strong></br>
+                    <br></br>
+                    <br><strong>ANNEE : 01 / 2020</strong></br>
+                </div>
+        
+                    <table  class="m" width="100%">
+                                <tr>
+                                    <th style="text-align: left">Identifiant Fiscal de l'employeur </th>
+                                    <td style="text-align: left">: 01031059</td>
+                                    <th style="text-align: center">Nom et Prénom ou Raison Sociale </th>
+                                    <td style="text-align: center">: PETROM</td>
+                                    <th style="text-align: right">Intercalaire N°  </th>
+                                    <td style="text-align: right">: 1 / 2</td>
+                                </tr>
+                    </table> 
+
+                <table class="centre marg bord">
+                            <tr>
+                                <thead>
+                                        <tr>
+                                            <th class="bord" rowspan="2"> NUMERO DE MAICULE 
+                                            <th class="bord">NOM ET PRENOM</th>
+                                            <th class="bord">N° CIN ou Carte d'étranger</th>
+                                            <th class="bord" rowspan="2"> S F</th>
+                                            <th class="bord">Montant brut des traitements, salaires et émoluments (1)</th>
+                                            <th class="bord">Montant des indmenités Verséess à titre de frais professionels (3)</th>
+                                            <th class="bord" rowspan="2"> Taux des Frais Prof</th>
+                                            <th class="bord">Montant du revenu brut imposable (5)</th>
+                                            <th class="bord" colspan="2">Montant des cotisations d'assurance retraite (7)</th>
+                                            <th class="bord">Montant des autres retenues (8)</th>
+                                            <th class="bord">Montant du revenu net imposable (10)</th>
+                                            <th class="bord">Période en jours</th>
+                                            </th>
+                                        <tr>
+                                            <th class="bord"> ADRESSE PERSONNELLE </th>
+                                            <th class="bord">N° P.P.R ou CNSS</th>
+                                            <th class="bord">Montant des indmenités Verséess à titre de frais professionels (3)</th>
+                                            <th class="bord">Montant des éléments exonérés (4)</th>
+                                            <th class="bord">Montant des Frais professionels (6)</th>
+                                            <th class="bord">Montant des Echéances prélevées (9)</th>
+                                            <th class="bord">Date de l'AC (**)</th>
+                                            <th class="bord">Date du PH (***)</th>
+                                            <th class="bord">I.R prélevé (11)</th>
+                                            <th class="bord">Nb.Déductions pour charges de famille</th>
+                                        </tr>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="bord" rowspan="2"> 000160 
+                                    <td class="bord">OUNKHIL LAHOUSSINE</td>
+                                    <td class="bord">B 726776</td>
+                                    <td class="bord" rowspan="2"> M</td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                    <tr>
+                                        <td class="bord"> AZHAR 1MM 15 N 37 TR 7/1 CASA </td>
+                                        <td class="bord">183321811</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">1 040,00</td>
+                                        <td class="bord">1 711,56</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">0,00</td>
+                                        <td class="bord">398,21</td>
+                                        <td class="bord">3</td>
+                                    </tr>
+                                </tr>
+                        </tbody>
+                            <tr>
+                                    <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL PAGE</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                            </tr>
+    
+                            <tr>
+                                   <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL CUMULE</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                        </tr>
+                        <tr>
+                                    <td class="bord" rowspan="2">  
+                                    <th class="bord" rowspan="2">TOTAL GENERAL</th>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord" rowspan="2"></td>
+                                    <td class="bord">9 597,78</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord" rowspan="2"> 20</td>
+                                    <td class="bord">8 557,78</td>
+                                    <td class="bord" colspan="2">0,00</td>
+                                    <td class="bord">1 329,97</td>
+                                    <td class="bord">5 516,25</td>
+                                    <td class="bord">26</td>
+                                    </td>
+                                <tr>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord"></td>
+                                    <td class="bord">1 711,56</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                    <td class="bord">0,00</td>
+                                </tr>
+                        </tr>
+                        </tr>
+                    </table> -->
+
+                    <!-- ANNEXE A LA DECLARATION DES TRAITEMENTS ET SALAIRES -->
+
+                                <!-- livre de paie -->
+
+            <!-- <style>
+                
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                
+                }
+
+                
+                div.s {
+                width: 60%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                    border: 1px black;
+                    border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                
+                border-style: dotted;
+                border: 1px black;
+                }
+                div.m {
+                margin-top:20px;
+                }
+        
+                </style>
+
+                <div class="m" style="text-align:right;vertical-align:right">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                </div>
+                
+                
+                <div class="m" style="vertical-align:left">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s m">
+                    <strong><h4> LIVRE DE PAIE </h4></strong>
+                </div>
+
+                <div class="n m">
+                    Periode du : 01/2020
+                </div>
+               
+                <table  class="m" width="99%">
+                <thead>
+                    <tr>
+                        <td style="text-align: left">000160 - OUNKHIL LAHOUSSINE</td>
+                        <td style="text-align: right">Date d'Entrée : 04/05/1981</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align:center" >N° CNSS : 183321811</td>
+                        <td style="text-align:left" >Agent Dépôt</td>
+                    </tr>
+               
+                 </tbody>
+
+            </table> 
+
+
+                <table  class="doted m" width="99%">
+                <thead>
+                    <tr>
+                        <th class="doted" style="text-align: center"><u>Rubrique</u></th>
+                        <th class="doted" style="text-align: center"><u>Intitulé :</u></th>
+                        <th class="doted" style="text-align: center"><u>Base </u></th>
+                        <th class="doted" style="text-align: center"><u>Montant</u></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  class="doted" style="text-align:center" >546</td>
+                        <td  class="doted" style="text-align:center" >451</td>
+                        <td  class="doted" style="text-align:center" >444</td>
+                        <td  class="doted" style="text-align:center">4646451</td>
+                        
+                    </tr>
+                   
+                    <tr>
+                        <th></th>
+                        <th class="doted" style="text-align:center">NET A PAYER: </th>
+                        <td  class="doted" style="text-align:center"><strong>4646451</strong></td>
+                        <td  class="doted" style="text-align:center"><strong>4646451</strong></td>
+                    </tr>
+                    
+                </tbody>
+
+            </table>  -->
+                            <!-- livre de paie -->
+
+
+                            <!-- ETAT RECAPITULATIF -->
+             <!-- <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                
+                }
+
+                
+                div.s {
+                width: 60%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                    border: 1px black;
+                    border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                
+                border-style: dotted;
+                border: 1px black;
+                }
+                div.m {
+                margin-top:20px;
+                }
+        
+                </style>
+
+                <div class="m" style="text-align:right;vertical-align:right">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                </div>
+                
+                
+                <div class="m" style="vertical-align:left">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s m">
+                    <strong><h4> ETAT RECAPITULATIF </h4></strong>
+                </div>
+
+                <div class="n m">
+                    Periode du : 01/2020
+                </div>
+               
+                
+
+                <table  class="doted m" width="99%">
+                <thead>
+                    <tr>
+                        <th class="doted" style="text-align: center"><u>Rubrique</u></th>
+                        <th class="doted" style="text-align: center"><u>Intitulé :</u></th>
+                        <th class="doted" style="text-align: center"><u>Cumul Bases </u></th>
+                        <th class="doted" style="text-align: center"><u>Cumul Gains</u></th>
+                        <th class="doted" style="text-align: center"><u>Cumul Retenues</u></th>
+                        <th class="doted" style="text-align: center"><u>Cum.Parts Patr</u></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  class="doted" style="text-align:center" >546</td>
+                        <td  class="doted" style="text-align:center" >451</td>
+                        <td  class="doted" style="text-align:center" >444</td>
+                        <td  class="doted" style="text-align:center" >45</td>
+                        <td  class="doted" style="text-align:center" >45</td>
+                        <td  class="doted" style="text-align:center" >45</td>
+                        
+                    </tr>
+                    <tr>
+                        <th  class="doted" style="text-align:right" colspan="3">TOTAL GENERAL: </th>
+                        <td  class="doted" style="text-align:center"><strong>4646451</strong></td>
+                        <td  class="doted" style="text-align:center"><strong>544544</strong></td>
+                        <td  class="doted" style="text-align:center"><strong>544544</strong></td>
+                    </tr>
+                    <tr>
+                        <th class="doted" style="text-align:right" colspan="2">NET A PAYER: </th>
+                        <td  class="doted" style="text-align:center"><strong>4646451</strong></td>
+                    </tr>
+                    
+                </tbody>
+
+            </table> -->
+                            <!-- ETAT RECAPITULATIF -->
+
+
+                            <!-- MOUVEMENTS COMPTABLES PAR COMPTES -->
+                <!-- <style>
+                table, th, td {
+                border: none;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                div.s {
+                width: 60%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                border-style: dotted;
+                border: 1px black;
+                }
+
+                </style>
+
+                <div style="position:absolute;left:698px;top:5.98px">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                </div>
+                
+                <div class="n" style="position:absolute;left:400px;top:100.98px">
+                    Periode du : 01/2020
+                </div>
+                
+                <div style="position:absolute;top:5.98px">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s" style="position:absolute;left:200px;top:60.98px">
+                    <strong><h4> MOUVEMENTS COMPTABLES PAR COMPTES </h4></strong>
+                </div>
+
+                
+
+                <table  style="position:absolute;left:0px;top:210.98px" class="doted" width="99%">
+                <thead>
+                    <tr>
+                        <th class="doted" style="text-align: center">Imputation</th>
+                        <th class="doted" style="text-align: center">Desigantion</th>
+                        <th class="doted" style="text-align: center">Montant Débit</th>
+                        <th class="doted" style="text-align: center">Montant Crédit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  class="doted" style="text-align:center" >546</td>
+                        <td  class="doted" style="text-align:center" >451</td>
+                        <td  class="doted" style="text-align:center" >444</td>
+                        <td  class="doted" style="text-align:center" >45</td>
+                        
+                    </tr>
+                    <tr>
+                        <th  colspan="2"></th>
+                        <td  class="doted" style="text-align:center"><strong>4646451</strong></td>
+                        <td  class="doted" style="text-align:center"><strong>544544</strong></td>
+                    </tr>
+                    
+                </tbody>
+
+            </table>           -->
+
+
+                 <!-- MOUVEMENTS COMPTABLES PAR COMPTES -->
+                <!-- Etat Récapitulatif de la C.N.S.S -->
+        <!-- <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                
+                }
+
+                
+                div.s {
+                width: 60%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                    border: 1px black;
+                    border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                
+                border-style: dotted;
+                border: 1px black;
+                }
+
+                </style>
+
+                <div style="text-align:right;vertical-align:right">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                </div>
+                
+                
+                <div style="vertical-align:left">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s" >
+                    <strong><h4> Etat Récapitulatif de la C.N.S.S </h4></strong>
+                </div>
+
+                <div class="n">
+                    Periode du : 01/2020
+                </div>
+
+                    <table class="doted" style="width:100%">
+                        <tr>
+                            <thead>
+                                <tr>
+                                    <td class="doted"></td>
+                                    <th class="doted" style="text-align: center"> Masse Salariale </th>
+                                    <th class="doted" style="text-align: center"> Taux </th>
+                                    <th class="doted" style="text-align: center"> Montant </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="doted">  Allocations Familiales :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Prestations Sociales :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Total de Cotisation Versées :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Taxe De Formation Prof. </th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Prestations Sociales :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Montant des Versements :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Cotisation AMO :</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted"> Participation AMO </th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                                <tr>
+                                    <th class="doted">Montant Global des Versements</th>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                    <td class="doted"></td>
+                                </tr>
+                        </tbody>
+                        </tr>
+                    </table>
+                     
+                    <div>
+                        <strong>15/01/2021</strong>
+                    </div> -->
+                            <!-- Etat Récapitulatif de la C.N.S.S -->
+
+                            <!-- ETAT RECAPULATIF C.N.S.S -->
+                
+                <!-- 
+                <style type = "text/css">
+        table.centro {
+        margin-left:auto; 
+        margin-right:auto;
+        }
+        table.empty {
+        width:350px;
+        empty-cells:show;
+        }
+        td.empty {
+        padding:15px;
+        border: 1px solid black;
+        height:300px
+        }
+        td.bord {
+        border: 1px solid black;
+        }
+        th {
+        border: 1px solid black;
+        }
+        table.centre {
+        margin-left:auto; 
+        margin-right:auto;
+        width:100%;
+        }
+        .inline { 
+        display: inline; 
+        }
+        th.nobord {
+        border: none;
+        }
+        div.m {
+        margin-top:20px;
+        }
+        table.marg {
+        margin-top:30px;
+        }
+        table.empty {
+        empty-cells:show;
+        }
+        td.empty {
+            padding:5px;
+            border: 1px solid black;
+            height:3px
+         }
+                
+      </style>
+
+                <div>
+                    <strong>ETAT DES FIXES, VARIABLES ET CHARGES RECAP</strong>
+                    <br>15/01/2021</br>
+                </div>
+
+                    <table class="centre marg empty">
+                        <tr>
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td></td>                                
+                                    <th class="bord" style="text-align: center"> CHARGES </th>
+                                    <th class="bord" style="text-align: center"> FIXES </th>
+                                    <th class="bord" style="text-align: center"> VARIABLES </th>
+                                    <th class="bord" style="text-align: center"> TOTAL </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> ACC-Accueil 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </tr>
+                                </tr>
+                                
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> B C-Bons à Crédits 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+                                
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> CMP1-Comptabilité 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> DAGD-Dépôt Agadir 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+                                
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> DMDIA-Dépôt Mohammedia 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+                                
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> DPC-Dépôt Produits Chimiques 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+
+                                <tr>
+                                    <tr>
+                                        <th rowspan="2"> REC-Recouvrement 
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:30%"> Total </th>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                            <td class="bord">Brahim</td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Total </th>
+                                </tr>
+                        </tbody>
+                        </tr>
+                    </table>
+                     
+                    <div>
+                        <strong>15/01/2021</strong>
+                    </div> 
+                      -->
+
+                            <!-- ETAT RECAPULATIF C.N.S.S -->
+
+                            <!-- ETAT C.N.S.S SIMPLIFIEE -->                
+                <!-- <style>
+                table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                th, td {
+                padding: 1px;
+                text-align: left;    
+                }
+                mark {
+                background-color: #e8e6e6;
+                color: black;
+                }
+                div.shadow {
+                border: 1px solid black;
+                box-shadow: 10px 5px 5px black;
+                margin-left:auto; 
+                margin-right:auto;
+                
+                }
+
+                
+                div.s {
+                width: 60%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                }
+                div.n{
+                text-align:center;
+                vertical-align:center;
+                margin-left:auto; 
+                margin-right:auto;
+                }
+                td.doted {
+                    border: 1px black;
+                    border-style: dotted;
+                }
+                th.doted {
+                border: 1px black;
+                border-style: dotted;
+                }
+                table.doted {
+                
+                border-style: dotted;
+                border: 1px black;
+                }
+
+                </style>
+
+                <div style="position:absolute;left:698px;top:5.98px">
+                    <strong><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y/%m/%d')"/></strong>
+                </div>
+                
+                <div class="n" style="position:absolute;left:400px;top:100.98px">
+                    Periode du : 01/2020
+                </div>
+                
+                <div style="position:absolute;top:5.98px">
+                    <strong>PETROM</strong>
+                    <br><strong>7 LOT. LA COLLINE 2 SIDI MAARO</strong></br>
+                    <br><strong>1953901</strong></br>
+                </div>
+
+                <div class="n s" style="position:absolute;left:200px;top:60.98px">
+                    <strong><h4> Etat C.N.S.S Simplifiée </h4></strong>
+                </div>
+
+                
+
+                <table  style="position:absolute;left:0px;top:210.98px" class="doted" width="99%">
+                <thead>
+                    <tr>
+                        <th class="doted">CNSS</th>
+                        <th class="doted" style="text-align: center">Mle</th>
+                        <th class="doted" style="text-align: center">Nom Prenom</th>
+                        <th class="doted" style="text-align: center">NBJ</th>
+                        <th class="doted" style="text-align: center">Sal</th>
+                        <th class="doted" style="text-align: center">Sal. Plaf</th>
+                        <th class="doted" style="text-align: center">Cot. Sal</th>
+                        <th class="doted" style="text-align: center">Cot. Pat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        <td  class="doted" style="text-align:center" ></td>
+                        
+                    </tr>
+                    <tr>
+                        <th class="doted" colspan="3" style="text-align: right;padding:2px; margin:2px">TOTAL (HT) :</th>
+                        <td  class="doted" ></td>
+                        <td  class="doted" ></td>
+                        <td  class="doted" ></td>
+                        <td  class="doted" ></td>
+                        <td  class="doted" ></td>
+                    </tr>
+                    
+                </tbody>
+
+            </table> -->
+                                                        <!-- ETAT C.N.S.S SIMPLIFIEE -->
+
+
+                <!-- <div style="height:80px;vertical-align:center;padding:0px; margin:0px;text-align: center" class="cls_009">
+                    <h4><br> الجمعية المهنية للمطاحن الصناعية لجهة الجنوب </br> 
+                    <br>Association Professionnelle de la Minoterie Industrielle de la Région du Sud</br> </h4></div>
+                
+                <table style="position:absolute;top:100.26px;width:100%">
+                        <tr>
+                            <th style="border: 1px solid black;border-bottom: none" width="100%"><span style="position: absolute;top: -17px;background: #fff;padding: 5px;left: 0;right: 0;margin: auto;width: 190px"><h6>(MEMBRE DE LA F.N.M.)</h6></span></th>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: none;text-align:center" width="100%">“Créée par Dahir n° 1-95-8 du 22 Ramadan 1415 (22 Février 1995) portant promulgation de la loi n° 12/94”</td>
+                        </tr>
+                </table>
+
+                <table style="position:absolute;top:170.26px;width:100%">
+                                    <tr>
+                                        <th width="50%"><h4>Bon de livraison</h4></th>
+                                        <th style="text-align:right" width="50%"><h4>ورقة التسليم</h4></th>
+                                    </tr>
+                </table> -->
+                <!-- <div style="position:absolute;top:190.26px;height:80px;border: 3px;border-style: solid;vertical-align:center;text-align: center">
+                    <h4>691.41 </h4>
+                </div> -->
+
+                <!-- <table style="position:absolute;top:210.26px;width:100%">
+                        <tr>
+                            <th style="border-bottom: none;text-align:center" width="100%"><h4>691.41</h4></th>
+                        </tr>
+                </table>
+
+                <table style="position:absolute;left:510px;top:250.26px;border: 1px solid black;border-radius: 13px;border-collapse: separate;width:40%;height:120px">
+                        <tr>
+                            <th style="border-bottom: none;border-radius: 130px;text-align:center" width="100%"><h5>LES GRANDS MOULINS EL ATLAS </h5></th>
+                        </tr>
+                        <tr>
+                            <td style="border-bottom: none;border-radius: 130px;text-align:center"><h5>Ait Melloul</h5></td>
+
+                        </tr>
+                </table>
+                <table style="position:absolute;top:250.26px;border: 1px solid black;border-radius: 13px;border-collapse: separate;width:55%">
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">CLIENT</th>
+                            <td style="text-align:left;padding:0px; margin:0px">LIFSAL TAYEB</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">CIN</th>
+                            <td style="text-align:left;padding:0px; margin:0px">GM149733</td>
+
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Adress</th>
+                            <td style="text-align:left;padding:0px; margin:0px">Centre Sidi Bousheb</td>
+
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Centre Livr</th>
+                            <td style="text-align:left;padding:0px; margin:0px">Sidi Bousheb</td>
+
+                        </tr>
+                         <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Province</th>
+                            <td style="text-align:left;padding:0px; margin:0px">Chtouka Ait Baha</td>
+
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">OT</th>
+                            <td style="text-align:left;padding:0px; margin:0px">0920G40446</td>
+
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Serie</th>
+                            <td style="border-bottom: none;text-align:left;padding:0px; margin:0px">456333</td>
+
+                        </tr>
+                </table>
+
+                <table style="position:absolute;left:510px;top:370.26px;border: 1px solid black;border-radius: 13px;border-collapse: separate;width:40%;height:100px">
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Date</th>
+                            <td style="text-align:left;padding:0px; margin:0px">24/09/2020</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">HEURE</th>
+                            <td style="text-align:left;padding:0px; margin:0px">08:29</td>
+
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">cmde</th>
+                            <td style="border-bottom: none;text-align:left;padding:0px; margin:0px"></td>
+
+                        </tr>
+                        
+                </table>
+
+                 <table style="position:absolute;top:420.26px;border: 1px solid black;border-radius: 13px;border-collapse: separate;width:55%">
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">الناقل:</th>
+                
+                        </tr>
+                        <tr>
+                            <th style="text-align:center;padding:0px; margin:0px" width="30%">Transporteur:</th>
+                            <td rowspan="2" style="border-bottom: none;text-align:left;padding:0px; margin:0px;vertical-align:top">S.N.T.L</td>
+
+                        </tr>
+                       
+                        
+                </table>
+
+                <table style="position:absolute;top:500.26px;border: 1px solid black;border-radius: 13px;border-collapse: separate;width:100%">
+                        <tr>
+                            <th style="border: 1px solid black;border-left: none;border-right: none;border-top: none;text-align:center;padding:0px; margin:0px">السلسلة التعريفية<br>Série d’Identification</br></th>
+                            <th style="border: 1px solid black;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">عدد الوحدات<br>Nombre d'Unités</br></th>
+                            <th style="border: 1px solid black;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px" >Tوزن الوحدة<br>Poids Unitaire</br></th>
+                            <th style="border: 1px solid black;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px" >نوع البضاعة<br>Nature de la Marchandise</br></th>
+                            <th style="border: 1px solid black;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">الوزن بالقنطار<br>Poids en Quintaux</br></th>
+                
+                        </tr>
+                        <tr>
+                            
+                           <td style="height:300px;border: 1px solid black;border-bottom: none;border-top: none;border-right: none;border-left: none;text-align:center;padding:0px; margin:0px">174787878</td>
+                           <td style="height:300px;border: 1px solid black;border-bottom: none;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">160</td>
+                           <td style="height:300px;border: 1px solid black;border-bottom: none;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">50</td>
+                           <td style="height:300px;border: 1px solid black;border-bottom: none;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">F.NL Ble teindre</td>
+                           <td style="height:300px;border: 1px solid black;border-bottom: none;border-top: none;border-right: none;text-align:center;padding:0px; margin:0px">80</td>
+
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="border: 1px solid black;text-align: right;border-bottom: none;border-right: none;border-left: none;padding:2px; margin:2px">TOTAL</th>
+                            <td style="border: 1px solid black;text-align: center;border-bottom: none;border-right: none;border-left;padding:0px; margin:0px">80</td>
+                        </tr> -->
+                        <!-- <tr>
+                                    <td style="height:100px;vertical-align:bottom;border: 1px solid black;border-collapse: collapse;border-bottom: none">Total</td> 
+                        </tr> -->
+<!--                         
+                </table>
+
+                <div style="position:absolute;top:880px;text-align:center" class="cls_004">
+				    <span class="cls_004">توقيع المسلم<br>Signature et Cachet du Livreur</br></span>
+                </div>
+
+                <div style="position:absolute;left:680.99px;top:880px;text-align:center" class="cls_004">
+				    <span class="cls_004">Accusé de Réception</span>
+                </div>
+
+                 -->
+                
+                    <!-- <div style="height:80px;vertical-align:center;border: 3px;border-style: solid;background-color:#DCDCDC;color: black;padding:0px; margin:0px;text-align: center" class="cls_009">
+                    <h4><br> FICHE DE MISSION </br></h4></div>
+
+                    <div style="position:absolute;left:720px;top:80.26px">
+                    <h6>DATE  <span t-field="o.date_birth"/></h6>
                     </div>
 
-                    <table class="table table-bordered" >
-                        <tr class="border-black" >
-                            <h4>Information Générale</h4>
+                    <div style="position:absolute;top:138.Y26px">
+                    <h5><mark>CLIENT : </mark><span>........</span></h5>
+                    </div>
 
-                            <thead>
+                    <div style="position:absolute;top:178.26px">
+                    <h5><mark>APPELANT: </mark><span>…………</span></h5>
+                    <p>Heure de départ (INJAD) : <span>……h……</span></p> 
+                    
+                    </div>
+                     <div style="position:absolute;top:240.26px">
+                    Base de départ :<span> ……h……</span> 
+                    </div>
 
-                                <tr>
-                                    <th style="border: 1px solid black"  class="text-left">Lieu d'installation</th>
-                                    <th style="border: 1px solid black" class="text-left">Date d'installation</th>
-                                    <th style="border: 1px solid black" class="text-left">Bénéficiaire</th>
+                    <div style="position:absolute;left:300px;top:178.26px">
+                    Heure d’appel : <span>……h……</span> 
+                    </div>
 
-                                </tr>
-                            </thead>
-                         <tbody>
-                                     <tr t-foreach="docs" t-as="l">
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.lieu_install"/></td>
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.date_instal"/></td>
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.client_id"></span></td>
-
-                                     </tr>
-
-                         </tbody>
+                    <table  style="position:absolute;left:300px;top:240.26px;width:60%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="30%">Ain Sebaa </td> 
+                            <td style="border-bottom: none;padding:0px; margin:0px"><span><t t-if="o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
+                                        <label for="checkbox" class="label-table form-check-label"></label>
+                                    </t>
+                                <t t-if="not o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give"/>
+                                        </t></span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="30%"> Mâarif</td> 
+                            <td style="border-bottom: none;padding:0px; margin:0px"><span> <t t-if="o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
+                                        <label for="checkbox" class="label-table form-check-label"></label>
+                                    </t>
+                                <t t-if="not o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give"  />
+                            </t></span></td>
                         </tr>
-                     </table>
 
-                    <table class="table table-bordered">
-                        <tr class="border-black">
-                            <h4>Information sur Véhicule</h4>
+                    </table>
 
-                            <thead>
+                    <div style="position:absolute;top:270.26px">
+                    <strong>N° DE DOSSIER : <span>…………………</span></strong>
+                    </div>
 
-                                <tr>
-                                    <th style="border: 1px solid black" class="text-left">Type Véhicule</th>
-                                    <th style="border: 1px solid black" class="text-left">Marque/Modèle</th>
-                                    <th style="border: 1px solid black" class="text-left">Réf Rés Pr</th>
-                                    <th style="border: 1px solid black" class="text-left">Réf Rés Sec</th>
+                    <div style="position:absolute;top:305.26px">
+                    <h5><mark>Nature Intervention : </mark><span> </span></h5>
+                    </div>
 
-                                </tr>
-                            </thead>
-                         <tbody>
-                                     <tr t-foreach="docs" t-as="l">
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.type_ve_id"/></td>
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.marque_id"/></td>
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.reference_id"/></td>
-                                            <td style="border: 1px solid black" class="text-left"><span t-field="l.ref_reservoir_sec"/></td>
+                    <div style="position:absolute;top:352.26px">
+                    <h5><mark>AMBULANCE : </mark><span> </span></h5> 
+                    </div>
 
-                                     </tr>
-
-                         </tbody>
+                    <div style="position:absolute;top:400.26px">
+                    <h5><mark><u>RENSEIGNEMENTS MALADE</u></mark></h5>
+                    <table  style="width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="50%" >Nom et prénom du malade : <span>……………………………………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="50%" >Tél :<span>……………………………………</span></td>
                         </tr>
-                     </table>
-
-
-
-
-                            <table class="table table-bordered">
-                                <tr class="border-black">
-                                    <h4>Matériel Installé</h4>
-                                    <!-- <strong>Matériel Installé</strong> -->
-                                   <!-- <th class="text_left">Boitier GPS/GPRS</th> -->
-
-                                            <thead>
-                                             <tr t-foreach="docs" t-as="l">
-                                                          <th style="border: 1px solid black" class="text-center">Boitier GPS/GPRS</th>
-                                                          <th style="border: 1px solid black" class="text-center">Relais Moteur Marche</th>
-                                                          <th style="border: 1px solid black" class="text-center">Relais Immob</th>
-                                                          <th style="border: 1px solid black" class="text-center">Jauge carburant Pr</th>
-                                                          <th style="border: 1px solid black" class="text-center">Jauge carburant Sec</th>
-                                                          <th style="border: 1px solid black" class="text-center">Sonde Température</th>
-
-
-                                 <!-- in case bghitiha fl column                       <th>
-                                                            <t t-if="l.relais_moteur_marche">
-                                                            <input type="checkbox" id="checkbox104_anyting_you_give" checked="checked"/>
-                                                                <label for="checkbox" class="label-table form-check-label"></label>
-                                                            </t>
-                                                         </th>
-                                                        <th>Second column</th> -->
-                                                        <!--     <td><span t-field="l.relais_moteur_marche"/></td>
-                                                            <td><span t-field="l.relais_immobilisation"></span></td> -->
-                                             </tr>
-                                            </thead>
-                                             <tbody>
-                                                            <tr t-foreach="docs" t-as="l">
-                                                                <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.boitier_gps">
+                    </table>
+                    </div>
+                    <div style="position:absolute;top:455.26px">
+                        Adresse : <span>……………</span>
+                    </div>
+                    <div style="position:absolute;top:480.26px">
+                        Nature de la maladie : <span>……………</span>
+                    </div>
+                    <div style="position:absolute;top:505.26px">
+                        Date de naissance (Age) : <span>………………………</span>
+                    </div>
+                    <table  style="position:absolute;top:530.26px;width:60%">
+                        <tr>   
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%"> Sexe: </td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%">masculin </td> 
+                                <td style="border-bottom: none;padding:0px; margin:0px" width="20%">
+                                    <span><t t-if="o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
+                                    <label for="checkbox" class="label-table form-check-label"></label>
+                                            </t>
+                                        <t t-if="not o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give"  />
+                                            </t></span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%"> féminin</td> <td style="border-bottom: none;padding:0px; margin:0px" width="20%">
+                            <span> <t t-if="o.boitier_gps">
                                                             <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
                                                                 <label for="checkbox" class="label-table form-check-label"></label>
                                                             </t>
-                                                            <t t-if="not l.boitier_gps">
+                                                            <t t-if="not o.boitier_gps">
                                                             <input type="checkbox" id="checkbox104_anything_you_give"  />
-                                                            </t>
-                                                                </td>
-                                                                <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.relais_moteur_marche">
-                                                            <input type="checkbox" id="checkbox104_anything_yu_give" checked="checked"/>
+                                                            </t></span></td>
+                        </tr>
+
+                    </table>
+                    <table  style="position:absolute;top:555.26px;width:60%">
+                        <tr>   
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%"> Mutuelle: </td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%">Oui: </td> 
+                                <td style="border-bottom: none;padding:0px; margin:0px">
+                                <span><t t-if="o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
+                                    <label for="checkbox" class="label-table form-check-label"></label>
+                                    </t>
+                                    <t t-if="not o.boitier_gps">
+                                    <input type="checkbox" id="checkbox104_anything_you_give"  />
+                                    </t></span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%">Non: </td> <td style="border-bottom: none;padding:0px; margin:0px" ><span> <t t-if="o.boitier_gps">
+                                                            <input type="checkbox" id="checkbox104_anything_you_give" checked="checked"/>
                                                                 <label for="checkbox" class="label-table form-check-label"></label>
                                                             </t>
-                                                            <t t-if="not l.relais_moteur_marche">
-                                                            <input type="checkbox" id="checkbox104_anything_yu_give"  />
-                                                            </t>
-                                                            </td>
+                                                            <t t-if="not o.boitier_gps">
+                                                            <input type="checkbox" id="checkbox104_anything_you_give"/>
+                                                            </t></span></td>
+                        </tr>
 
-                                                            <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.relais_immobilisation">
-                                                            <input type="checkbox" id="checkbox104_anythig_yu_give" checked="checked"/>
-                                                                <label for="checkbox" class="label-table form-check-label"></label>
-                                                            </t>
-                                                            <t t-if="not l.relais_immobilisation">
-                                                            <input type="checkbox" id="checkbox104_anythig_yu_give"  />
-                                                            </t>
-                                                            </td>
+                    </table>
 
-                                                             <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.jauge_crb_prin">
-                                                            <input type="checkbox" id="checkbox104_aythig_yu_give" checked="checked"/>
-                                                                <label for="checkbox" class="label-table form-check-label"></label>
-                                                            </t>
-                                                            <t t-if="not l.jauge_crb_prin">
-                                                            <input type="checkbox" id="checkbox104_aythig_yu_give"  />
-                                                            </t>
-                                                            </td>
+                    <div style="position:absolute;top:580.26px">
+                    LIEU DE PRISE EN CHARGE : <span>…………………</span> 
+                     <table  style="width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%">Heure d’arrivé : <span> ………h…………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%" ><strong>Déclarée à :<span>……………………</span></strong></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%" ><strong>Par :<span>……………</span></strong></td>
+                        </tr>
+                    </table>
+                    </div>
+                    <div style="position:absolute;top:630.26px">
+                    <span>Heure de départ : ………h……</span>
+                    <table  style="width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%">NOM FAMILLE DU PATIENT : <span> ……………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%" >ARRVEE  A  :<span>…………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="33.33%" >HEURE FIN MISSION A :<span>……………</span></td>
+                        </tr>
+                    </table>
+                    </div>
 
-                                                            <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.jauge_crb_sec">
-                                                            <input type="checkbox" id="checkbox104_aytig_yu_give" checked="checked"/>
-                                                                <label for="checkbox" class="label-table form-check-label"></label>
-                                                            </t>
-                                                            <t t-if="not l.jauge_crb_sec">
-                                                            <input type="checkbox" id="checkbox104_aytig_yu_give"  />
-                                                            </t>
-                                                            </td>
+                    <div style="position:absolute;top:680.26px">
+                    <span>SIGNATURE :   </span> 
+                    </div>
 
-                                                            <td style="border: 1px solid black" class="text-center">
-                                                            <t t-if="l.sonde">
-                                                            <input type="checkbox" id="checkbox104_ayig_yu_give" checked="checked"/>
-                                                                <label for="checkbox" class="label-table form-check-label"></label>
-                                                            </t>
-                                                            <t t-if="not l.sonde">
-                                                            <input type="checkbox" id="checkbox104_ayig_yu_give"  />
-                                                            </t>
-                                                            </td>
+                    <div style="position:absolute;top:720.26px">
+                    <h5><mark><u>DESTINATION</u></mark></h5>
+                    <table  style="width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="60%">Destination 1 : <span> ……………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" >Départ à  :<span>…………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" > Arrivé :<span>……………</span></td>
+                        </tr>
+                         <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="60%">Destination 2 : <span> ……………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" >Départ à  :<span>…………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" > Arrivé :<span>……………</span></td>
+                        </tr>
+                         <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="60%">Destination 3 : <span> ……………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" >Départ à  :<span>…………</span></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="20%" > Arrivé :<span>……………</span></td>
+                        </tr>
+                        <tr>
+                            <th style="border-bottom: none;padding:0px; margin:0px" width="60%">Fin de mission: <span>……h……</span></th>
+                            <th style="border-bottom: none;padding:0px; margin:0px" width="20%" >Déclarée à :<span>…………</span></th>
+                            <th style="border-bottom: none;padding:0px; margin:0px" width="20%" > Par :<span>……………</span></th>
+                        </tr>
+                    </table>
+                    </div>
+
+                    <div style="position:absolute;top:870.26px">
+                    <h5><mark><u>EQUIPE</u></mark></h5>
+                    <table  style="width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="100%">Médecin : <span> ……………</span></td>
+                        </tr>
+                         <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="100%">Infirmière :<span>……………</span></td>
+                        </tr>
+                         <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="100%">Ambulancier :<span>……………</span></td>
+                        </tr>
+                    </table>
+                    </div>
+
+                      
+                    <table  style="position:absolute;top:1020.26px;width:100%">
+                        <tr>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="50%"><h5><mark><u>REGLEMENT</u></mark></h5></td>
+                            <td style="border-bottom: none;padding:0px; margin:0px" width="50%"><h5><mark><u>CONSOMATIONS</u></mark></h5></td>
+                            
+                        </tr>
+                         <tr>
+                            <tr>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> Consultation : <span>……………</span>DH</td>
+                                <td style="border-bottom: none;padding:0px; margin:0px" > ……………………………… : <span>……………</span>DH</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> Transport : <span>……………</span>DH</td>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> ……………………………… : <span>……………</span>DH</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> Couveuse : <span>……………</span>DH</td>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> ……………………………… : <span>……………</span>DH</td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> Injection   : <span>……………</span>DH</td>
+                                <td style="border-bottom: none;padding:0px; margin:0px"> ……………………………… : <span>……………</span>DH</td>
+                            </tr>
+                        </tr>
+
+        
+                    </table>
+
+                     <div style="position:absolute;top:1170.26px">
+                    <h5><mark><u>CARBURANT :</u></mark> <span> ……………… DH</span></h5>
+                    </div>
+
+                    <div style="position:absolute;left:300px;top:1225.26px">
+                    <h5><mark><u>Total  :</u></mark><span> ……………… DH</span></h5>
+                    </div>
+            
+                    
+
+                    
+ -->
 
 
 
-                                                            </tr>
+                    
 
-                                             </tbody>
-
-                                        </tr>
+               <!-- <table style="border: 1px solid black;padding:4px; margin:1px" width="100%" cellspacing="1" cellpadding="1">
+                    <tr>
+                     <td style="text-align: center;vertical-align:center;border-bottom: none" width="4%">
+                         <table style="border:none;width:100%">
+                            <tr>
+                               <td style="border-left:none; border-right:none;border-bottom: none;text-align: center;padding:0px; margin:0px"><br><span t-field="o.qr_image" t-options='{"widget": "image"}' /></br></td>
+                            </tr>
+                            </table>
+                    </td> 
+                    <td style="border-bottom: none;text-align: center;vertical-align: center;padding:0px; margin:0px" width="33.33%">
+                        <h5><strong><br>BULLETIN DE PAIE</br><br> Mars 2020</br></strong></h5>
+                    </td>
+                     <td style="border-bottom: none;text-align: center;vertical-align: center;padding:0px; margin:0px" width="15.33%">
+                        <h5><br><strong>OUNKHIL LAHOUSSINE</strong></br></h5>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="border-bottom: none" colspan="2">
+                            <table style="width:100%">
+                                    <tr>
+                                        <th width="50%">Matricule :<span> 000160</span></th>
+                                        <th width="50%">N° C.I.N :<span> 000000</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th>N° CNSS :<span> 00000</span></th>
+                                        <th>N° C.I.M.R :<span> 123</span></th>
+                                    </tr>
+                                    <tr>
+                                        <th>N° Mutuelle:<span> 0</span></th>
+                                        <th>Salaire de base :<span> 5938.65</span></th>
+                                    </tr>
+                            </table>
+                    </td>
+                    <td style="border-bottom: none" rowspan="2">
+                            <table style="width:100%">
+                                <tr><td style="text-align: center">
+                                    <br>Adresse du salarié :</br><br> XXXXXXXXXX </br>
+                                </td></tr>
+                                <tr>
+                                <td style="border-bottom: none;text-align: center">
+                                    <br>Mode paiement :</br><br> Virement </br>
+                                </td></tr>
+                            </table>
+                    </td>
+                    </tr>
+                     <tr>
+                    <td style="border-bottom: none" colspan="2">
+                     <table  style="width:100%">
+                        <tr>
+                            <th width="50%" >Fonction:<span> Agent Dépôt</span></th>
+                            <th width="50%" >Département :<span> Logistique</span></th>
+                        </tr>
+                        <tr>
+                            <th>Date naissance :<span> 02/09/1961</span></th>
+                            <th>Date embauche:<span> 04/05/1981</span></th>
+                        </tr>
+                    </table>
+                        </td>
+                        </tr>
+                         <tr>
+                        <td style="border-bottom: none" colspan="3">
+                             <table style="width:100%">
+                                <tr style="text-align: center;background-color: #e8e6e6;color: black">
+                                    <th style="text-align: center">Genre</th>
+                                    <th style="text-align: center">Situation familiale</th>
+                                    <th style="text-align: center">Nbr. Enfants</th>
+                                    <th style="text-align: center">Nbr. Déductions</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">Homme</td>
+                                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">Mariée</td>
+                                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">2</td>
+                                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">2</td>
+                                </tr>
                             </table>
 
+                        </td>
+                        </tr>
+
+                </table>
+                <table style="border: 1px solid black;" width="100%">
+                <tr style="text-align: center;background-color: #e8e6e6;color: black">
+                    <th style="text-align: center" colspan="3">Rubriques</th>
+                    <th style="text-align: center">Base</th>
+                    <th style="text-align: center">Nbr / taux</th>
+                    <th style="text-align: center">Gains</th>
+                    <th style="text-align: center">Retenues</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">I.G.R.</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">4749.36</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">4749.36</td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">Salaire de base</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">5938.65</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">26.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">5938.65</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">Prime d'ancienneté</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">7423.31</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">1484.66</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">2</td>
+                </tr>
+                 <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">CIMR</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">445.4</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">100.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">445.4</td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">C.N.S.S</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">6000.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">4.48</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">268.8</td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">ASSURANCE MALADIE 1</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">445.4</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">100.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">445.4</td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">ASSURANCE DECE 2</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">7423.31</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.3</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">22.27</td>
+                </tr>
+                 <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="3">ASSURANCE DECE 1</th>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">7423.31</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.1</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px"></td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">7.42</td>
+                </tr>
+                <tr>
+                    <th style="text-align: left;border-bottom: none" colspan="5"></th>
+                    <th style="text-align: center;border-bottom: none;padding:0px; margin:0px">7423.31</th>
+                    <th style="text-align: center;border-bottom: none;padding:0px; margin:0px">1382.49</th>
+                </tr>
+                </table>
+
+                <table style="border: 1px solid black;width:100%">
+                    <tr>
+                    <th style="text-align: center" rowspan="2">Cumuls</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">BRUT</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">IMPOSABLE</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">IMPOTS</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">PERIODE</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">FP</th>
+                    <th style="text-align: center;border-top: none;background-color: #e8e6e6;color: black">NT.HP</th>
+                    <th colspan="4"></th>
+                    
+
+                </tr>
+                <tr>
+                    <td style="border-bottom: none;padding:0px; margin:0px">17815.95</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">14248.08</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">193.20000000000002</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">26.0</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">118.77</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px"></td>
+                    <th style="border-bottom: none;text-align: center;background-color: #e8e6e6;color: black" rowspan="2">NET A PAYER</th>
+                    <td style="border-bottom: none;text-align: center;background-color: #e8e6e6;color: black" rowspan="2">5790.82</td>
+                    
+                </tr>
+                 <tr>
+                    <th style="text-align: center;padding:0px; margin:0px">Mois</th>
+                    <td style="border-bottom: none;padding:0px; margin:0px">17815.95</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">14248.08</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">193.20000000000002</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">26.0</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px">118.77</td>
+                    <td style="border-bottom: none;padding:0px; margin:0px"></td>
+                    
+                    
+                </tr>
+                </table>
+
+                <table style="border: 1px solid black;" width="69%">
+                <tr style="text-align: center;background-color: #e8e6e6;color: black">
+                    <th style="text-align: center;background-color: #e8e6e6;color: black">RELIQ N-1</th>
+                    <th style="text-align: center;background-color: #e8e6e6;color: black">DROIT N</th>
+                    <th style="text-align: center;background-color: #e8e6e6;color: black">PRIS M-1</th>
+                    <th style="text-align: center;background-color: #e8e6e6;color: black">PRIS M</th>
+                    <th style="text-align: center;background-color: #e8e6e6;color: black">SOLDE</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">4.5</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.0</td>
+                    <td style="text-align: center;border-bottom: none;padding:0px; margin:0px">0.0</td>
+                </tr>
+                </table> -->
+
+                            
 
                 </t>
             </t>

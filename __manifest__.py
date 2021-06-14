@@ -22,6 +22,7 @@
 
     # any module necessary for this one to work correctly
     'depends': [
+        'hr',
         'base',
         'mail',
     ],
@@ -29,16 +30,22 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
         'views/fleet_list.xml',
         'views/tank.xml',
+        'views/tank_reference.xml',
+        #'static/src/css/sheet.css',
         'views/type_ve.xml',
         'views/report.xml',
         'views/Marque.xml',
         'views/EMI.xml',
+       
         #'views/reference.xml',
     ],
+
+    #'css': ['static/src/css/sheet.css'],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
